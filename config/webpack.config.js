@@ -1,12 +1,15 @@
 const path = require('path');
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const rules = require('./webpack.rules');
+const getPluginList = require('./webpack.plugins');
+
+const isDevMode = process.env.NODE_ENV === 'development';
 
 module.exports = {
-  mode: 'development',
+  mode: isDevMode ? 'development' : 'production',
 
   entry: {
+    vendor: ['react', 'react-dom'],
     app: [path.resolve(__dirname, '..', 'src', 'index.tsx')],
   },
 
@@ -26,105 +29,36 @@ module.exports = {
     },
   },
 
-  module: {
-    rules: [
-      {
-        test: /\.(ts|tsx|js|jsx)?$/,
-        exclude: /node_module/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+  optimization: !isDevMode
+    ? {
+        minimize: true, // UglifyJsPlugin
+        concatenateModules: true, // Tells webpack to find segments of the module graph which can be safely concatenated into a single module
+        splitChunks: {
+          cacheGroups: {
+            vendor: {
+              chunks: 'initial',
+              name: 'vendor',
+              enforce: true,
+            },
           },
         },
-      },
+      }
+    : {},
 
-      // ts-loader
-      {
-        test: /\.(ts|tsx)$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'ts-loader',
-          },
-        ],
-      },
+  module: { rules },
 
-      // style-loader
-      {
-        test: /\.(sa|sc|c)ss$/,
-        exclude: path.resolve(__dirname, '..', 'node_modules'),
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: { hmr: true },
-          },
-          { loader: 'css-loader' },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [require('autoprefixer')()],
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              prependData: `@import 'lib/index';`,
-              sassOptions: {
-                includePaths: [path.resolve(__dirname, '..', 'src', 'assets/styles')],
-              },
-            },
-          },
-        ],
-      },
+  plugins: getPluginList(isDevMode),
 
-      // file-loader
-      {
-        // fonts
-        test: /\.(eot|otf|woff|ttf|woff2)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: './fonts/[name].[ext]',
-            },
-          },
-        ],
-      },
+  devtool: isDevMode ? 'inline-source-map' : 'cheap-module-source-map',
 
-      {
-        // images
-        test: /\.(gif|jpg|jpeg|png|svg)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: './images/[name].[ext]',
-            },
-          },
-        ],
-      },
-    ],
-  },
-
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../public', 'index.html'),
-    }),
-
-    new MiniCssExtractPlugin({
-      path: path.resolve(__dirname, '..', 'dist'),
-      filename: 'styles.[contenthash:8].css',
-      chunkFilename: 'styles.[contenthash:8].chunk.css',
-    }),
-  ],
-
-  devServer: {
-    contentBase: path.join(__dirname, '..', 'build'),
-    index: 'index.html',
-    port: 3000,
-    host: '0.0.0.0',
-    hot: true,
-    historyApiFallback: true,
-  },
+  devServer: isDevMode
+    ? {
+        contentBase: path.join(__dirname, '..', 'build'),
+        index: 'index.html',
+        port: 3000,
+        host: '0.0.0.0',
+        hot: true,
+        historyApiFallback: true,
+      }
+    : {},
 };
