@@ -27,7 +27,9 @@ module.exports = {
       components: path.resolve(__dirname, '..', 'src', 'components'),
       pages: path.resolve(__dirname, '..', 'src', 'pages'),
       lib: path.resolve(__dirname, '..', 'src', 'lib'),
+      API: path.resolve(__dirname, '..', 'src', 'API'),
       assets: path.resolve(__dirname, '..', 'src', 'assets'),
+      constants: path.resolve(__dirname, '..', 'src', 'constants'),
     },
   },
 
