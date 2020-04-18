@@ -1,21 +1,25 @@
 import React, { useEffect } from 'react';
-import { getEmployeeList } from 'API/RESTful';
-import { useLaunchListQuery } from 'API/GraphQL';
+
+import { Subscribe } from 'unstated';
+import { EmployeeStore } from 'stores';
 
 import Presenter from './presenter';
 
 function Container() {
-  const { data, error, loading } = useLaunchListQuery();
+  useEffect(() => {}, []);
 
-  useEffect(() => {
-    getEmployeeList().then((response) => {
-      console.log('response:', response);
-    });
-
-    console.log('data', data);
-  }, [loading]);
-
-  return <Presenter />;
+  return (
+    <Subscribe to={[EmployeeStore]}>
+      {({ state, fetchEmployeeList }: EmployeeStore) => {
+        (state.loading || state.error) && fetchEmployeeList();
+        return (
+          <div>
+            <Presenter employeeList={state.employeeList} />
+          </div>
+        );
+      }}
+    </Subscribe>
+  );
 }
 
 export default Container;

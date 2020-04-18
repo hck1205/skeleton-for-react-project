@@ -18,6 +18,7 @@
     "baseUrl": "src",
     "paths": {
       "components/*": ["components/*"],
+      "stores/*": ["stores/*"],
       "pages/*": ["pages/*"],
       "lib/*": ["lib/*"],
       "API/*": ["API/*"],

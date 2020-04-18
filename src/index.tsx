@@ -5,6 +5,8 @@ import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 
+import { Provider as UnstatedProvider } from 'unstated';
+
 import App from './pages/App';
 
 import 'assets/styles';
@@ -14,10 +16,12 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <ApolloHooksProvider client={client}>
-      <App />
-    </ApolloHooksProvider>
-  </ApolloProvider>,
+  <UnstatedProvider>
+    <ApolloProvider client={client}>
+      <ApolloHooksProvider client={client}>
+        <App />
+      </ApolloHooksProvider>
+    </ApolloProvider>
+  </UnstatedProvider>,
   document.getElementById('root')
 );
