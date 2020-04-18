@@ -18,7 +18,8 @@
     "baseUrl": "src",
     "paths": {
       "pages/*": ["pages/*"],
-      "lib/*": ["lib/*"]
+      "lib/*": ["lib/*"],
+      "assets/*": ["assets/*"]
     },
     "typeRoots": ["types", "node_modules/@types"]
   },
