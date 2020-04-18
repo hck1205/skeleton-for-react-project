@@ -3,10 +3,10 @@ import { Header, Footer, MainTemplate } from 'components';
 
 import Container from './container';
 
-const About = () => (
+const Contact = () => (
   <MainTemplate header={<Header />} footer={<Footer />}>
     <Container />
   </MainTemplate>
 );
 
-export default About;
+export default Contact;

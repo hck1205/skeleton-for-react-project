@@ -4,3 +4,5 @@
 /build
 
 package-lock.json
+
+/src/API/GraphQL/index.tsx
