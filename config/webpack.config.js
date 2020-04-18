@@ -23,6 +23,8 @@ module.exports = {
     modules: ['node_modules'],
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json', '.css', '.scss', '.png', '.jpg', '.jpeg', '.svg'],
     alias: {
+      '~': path.resolve(__dirname, '..', 'node_modules'),
+      components: path.resolve(__dirname, '..', 'src', 'components'),
       pages: path.resolve(__dirname, '..', 'src', 'pages'),
       lib: path.resolve(__dirname, '..', 'src', 'lib'),
       assets: path.resolve(__dirname, '..', 'src', 'assets'),

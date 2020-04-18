@@ -17,6 +17,7 @@
     "sourceMap": true,
     "baseUrl": "src",
     "paths": {
+      "components/*": ["components/*"],
       "pages/*": ["pages/*"],
       "lib/*": ["lib/*"],
       "assets/*": ["assets/*"]
