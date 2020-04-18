@@ -77,6 +77,33 @@ module.exports = {
           },
         ],
       },
+
+      // file-loader
+      {
+        // fonts
+        test: /\.(eot|otf|woff|ttf|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: './fonts/[name].[ext]',
+            },
+          },
+        ],
+      },
+
+      {
+        // images
+        test: /\.(gif|jpg|jpeg|png|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: './images/[name].[ext]',
+            },
+          },
+        ],
+      },
     ],
   },
 
