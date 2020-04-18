@@ -6,7 +6,7 @@ module.exports = {
   mode: 'development',
 
   entry: {
-    app: [path.resolve(__dirname, '..', 'src', 'index.js')],
+    app: [path.resolve(__dirname, '..', 'src', 'index.tsx')],
   },
 
   output: {
@@ -17,13 +17,13 @@ module.exports = {
 
   resolve: {
     modules: ['node_modules'],
-    extensions: ['.js'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
   },
 
   module: {
     rules: [
       {
-        test: /\.(js|jsx)?$/,
+        test: /\.(ts|tsx|js|jsx)?$/,
         exclude: /node_module/,
         use: {
           loader: 'babel-loader',
@@ -31,6 +31,17 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
+      },
+
+      // ts-loader
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'ts-loader',
+          },
+        ],
       },
     ],
   },
