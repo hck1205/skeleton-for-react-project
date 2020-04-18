@@ -1,14 +1,15 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-import Home from './Home';
+import { routes } from 'lib/routes';
 
 export default function App() {
   return (
     <Router>
       <Suspense fallback={<div></div>}>
         <Switch>
-          <Route exact={true} path={'/'} component={Home} />
+          {routes.map(({ path, page, exact }, i) => (
+            <Route exact={exact} path={path} component={page} key={`${path}_${i}`} />
+          ))}
         </Switch>
       </Suspense>
     </Router>

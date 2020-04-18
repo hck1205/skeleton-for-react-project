@@ -16,6 +16,10 @@
     "downlevelIteration": true,
     "sourceMap": true,
     "baseUrl": "src",
+    "paths": {
+      "pages/*": ["pages/*"],
+      "lib/*": ["lib/*"]
+    },
     "typeRoots": ["types", "node_modules/@types"]
   },
   "include": ["**/*"],

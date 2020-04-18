@@ -18,6 +18,10 @@ module.exports = {
   resolve: {
     modules: ['node_modules'],
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+    alias: {
+      pages: path.resolve(__dirname, '..', 'src', 'pages'),
+      lib: path.resolve(__dirname, '..', 'src', 'lib'),
+    },
   },
 
   module: {
