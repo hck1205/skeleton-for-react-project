@@ -1,13 +1,12 @@
 @mixin Input {
-  input[type='text'] {
-    width: 460px;
-    height: 56px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-    font-size: 14px;
-    padding-left: 16px;
-  }
-  input::placeholder {
+  width: 460px;
+  height: 56px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  padding-left: 16px;
+
+  &::placeholder {
     font-size: 14px;
   }
 }
