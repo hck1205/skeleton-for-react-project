@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-import { API_BASE_URL, API_REQUEST_TIMEOUT, OAUTH_BASIC_KEY } from 'constants/variables';
+import { API_BASE_URL, API_REQUEST_TIMEOUT, OAUTH_BASIC_KEY } from 'constpack';
 
 class Client {
   private axios: AxiosInstance;

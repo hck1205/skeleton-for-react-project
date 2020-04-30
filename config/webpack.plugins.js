@@ -10,6 +10,18 @@ const CopyPlugin = require('copy-webpack-plugin');
 // Common Plugins
 module.exports = (isDevMode) => {
   let pluginList = [
+    // It removes old chunk files after webpack building
+    new CleanWebpackPlugin({
+      cleanAfterEveryBuildPatterns: ['build'],
+    }),
+
+    // build css files into styles and chunkfiles with hash naming
+    new MiniCssExtractPlugin({
+      path: path.resolve(__dirname, '..', 'build'),
+      filename: 'styles/styles.[contenthash:8].css',
+      chunkFilename: 'styles/styles.[contenthash:8].chunk.css',
+    }),
+
     // Read index.html file and use it as a template for dev-server
     // Produce index.html when webpack build
     new HtmlWebpackPlugin({
@@ -33,27 +45,13 @@ module.exports = (isDevMode) => {
   if (isDevMode) {
     pluginList.push(
       // Ts Type Checker
-      new ForkTsCheckerWebpackPlugin(),
-
-      new MiniCssExtractPlugin({
-        path: path.resolve(__dirname, '..', 'build'),
-        filename: 'styles.css',
+      new ForkTsCheckerWebpackPlugin({
+        tsconfig: 'tsconfig.json',
       })
     );
     // Prod Plugins
   } else {
-    pluginList.push(
-      // It removes old chunk files after webpack building
-      new CleanWebpackPlugin(),
-
-      new MiniCssExtractPlugin({
-        path: path.resolve(__dirname, '..', 'build'),
-        filename: 'styles.[contenthash:8].css',
-        chunkFilename: 'styles.[contenthash:8].chunk.css',
-      }),
-
-      new CopyPlugin([{ from: 'public/robots.txt', to: 'robots.txt' }])
-    );
+    pluginList.push(new CopyPlugin([{ from: 'public/robots.txt', to: 'robots.txt' }]));
   }
 
   return pluginList;

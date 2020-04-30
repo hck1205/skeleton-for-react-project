@@ -15,7 +15,8 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, '..', 'build'),
-    filename: '[name].js',
+    filename: isDevMode ? 'js/[name].[hash].js' : 'js/[name].[contenthash:8].js',
+    chunkFilename: isDevMode ? 'js/[name].[hash].chunk.js' : 'js/[name].[contenthash:8].chunk.js',
     publicPath: '/',
   },
 
@@ -25,12 +26,12 @@ module.exports = {
     alias: {
       '~': path.resolve(__dirname, '..', 'node_modules'),
       components: path.resolve(__dirname, '..', 'src', 'components'),
-      stores: path.resolve(__dirname, '..', 'src', 'stores'),
       pages: path.resolve(__dirname, '..', 'src', 'pages'),
-      lib: path.resolve(__dirname, '..', 'src', 'lib'),
+      stores: path.resolve(__dirname, '..', 'src', 'stores'),
       API: path.resolve(__dirname, '..', 'src', 'API'),
+      lib: path.resolve(__dirname, '..', 'src', 'lib'),
+      constpack: path.resolve(__dirname, '..', 'src', 'constpack'),
       assets: path.resolve(__dirname, '..', 'src', 'assets'),
-      constants: path.resolve(__dirname, '..', 'src', 'constants'),
     },
   },
 

@@ -1,6 +1,6 @@
 import { Home, About, Contact } from 'pages';
 
-export const routes = [
+const routes = [
   {
     path: ['/', '/home'],
     page: Home,
@@ -17,3 +17,5 @@ export const routes = [
     exact: true,
   },
 ];
+
+export default routes;

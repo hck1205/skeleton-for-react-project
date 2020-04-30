@@ -23,7 +23,7 @@
       "lib/*": ["lib/*"],
       "API/*": ["API/*"],
       "assets/*": ["assets/*"],
-      "constants/*": ["constants/*"]
+      "constpack/*": ["constpack/*"]
     },
     "typeRoots": ["types", "node_modules/@types"]
   },

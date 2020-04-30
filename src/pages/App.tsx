@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { routes } from 'lib/routes';
+import { routes } from 'lib';
 
 export default function App() {
   return (

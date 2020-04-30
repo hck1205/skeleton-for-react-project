@@ -57,7 +57,7 @@ module.exports = [
       {
         loader: 'sass-loader',
         options: {
-          prependData: `@import 'lib/index';`,
+          prependData: `@import 'lib/all';`,
           sassOptions: {
             includePaths: [path.resolve(__dirname, '..', 'src', 'assets/styles')],
           },
@@ -88,7 +88,7 @@ module.exports = [
       {
         loader: 'file-loader',
         options: {
-          name: './images/[name].[ext]',
+          name: './images/[contenthash:8].[ext]',
         },
       },
     ],
